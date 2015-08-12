@@ -3,37 +3,31 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* C Include:        %MCP5606B_ClkInit.h%
-* Instance:         1
-* %version:         1.2 %
+* C Include:        %Ind_PeriodicTasks.h%
+* Instance:         x
+* %version:         1 %
 * %created_by:      Michele Balbi %
-* %date_created:    2015 %
+* %date_created:    August 12 2015 %
 *=============================================================================*/
-/* DESCRIPTION : Header file for clock initialization functions.		      */
+/* DESCRIPTION : Header file for Indicator Control module.				      */
 /*============================================================================*/
-/* FUNCTION COMMENT :   Contains prototypes for clock init functions.         */
+/* FUNCTION COMMENT :   										              */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 25/06/2015  |                               | Michele Balbi    */
+/*  1.0      | 12/08/2015  |                               | Michele Balbi    */
 /* First Draft 																  */
-/*----------------------------------------------------------------------------*/
-/*  1.1      | 30/06/2015  |                               | Michele Balbi    */
-/* Formatting to pass C code review.                                          */
-/*----------------------------------------------------------------------------*/
-/*  1.2      | 30/07/2015  |                               | Michele Balbi    */
-/* Removed private defines to be in the .c file.                              */
 /*============================================================================*/
 
-#ifndef CLK_INIT_H
-#define CLK_INIT_H
+#ifndef IND_PERIODIC_TASKS_H                               /* To avoid double inclusion */
+#define IND_PERIODIC_TASKS_H
 
 /* Includes */
 /* -------- */
-#include "MPC5606B.h"
+#include "conti_typedefs.h"
 
 /* Exported types and constants */
 /* ---------------------------- */
@@ -75,12 +69,8 @@
 /* ---------------------------------------- */
 
 /* Functions prototypes */
-
-extern void initModesAndClock(void);
-
-extern void initPeriClkGen(void);
-
-extern void disableWatchdog(void);
+extern void Ind_CheckForCommand();
+extern void Ind_SetState();
 
 /* Functions macros */
 
@@ -89,3 +79,5 @@ extern void disableWatchdog(void);
 
 
 #endif
+
+

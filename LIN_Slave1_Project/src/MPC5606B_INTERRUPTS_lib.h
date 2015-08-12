@@ -26,6 +26,8 @@
 #define MPC5606B_INTERRUPTS_LIB
 
 #include "MPC5606B.h"
+#include "INTCInterrupts.h"
+#include "conti_typedefs.h"
 
 /* Interrupt Vectors */
 
@@ -49,6 +51,22 @@
 #define PIT5_Vector 129
 #define PIT6_Vector 130
 #define PIT7_Vector 131
+
+#define LINFLEX0_RX_Vector 	79
+#define LINFLEX0_TX_Vector 	80
+#define LINFLEX0_ERR_Vector 81
+
+#define LINFLEX1_RX_Vector 	99
+#define LINFLEX1_TX_Vector 	100
+#define LINFLEX1_ERR_Vector 101
+
+#define LINFLEX2_RX_Vector 	119
+#define LINFLEX2_TX_Vector 	120
+#define LINFLEX2_ERR_Vector 121
+
+#define LINFLEX3_RX_Vector 	122
+#define LINFLEX3_TX_Vector 	123
+#define LINFLEX3_ERR_Vector 124
 
 #define ADC0_EOC_Vector 	62
 #define ADC0_WD_Vector 		64
@@ -101,13 +119,26 @@
 #define	PRIORITY15	15
 
 #define INT_SW_VECTOR_MODE()			(INTC.MCR.R = 0x00000000u)
-#define INT_LOWER_CPR(priority)			(INTC.CPR.R = (priority))
+#define INT_SET_CPR(priority)			(INTC.CPR.R = (priority))
+#define INT_ENABLE_INTS()				(INTC.CPR.R = 0)
+#define INT_DISABLE_INTS()				(INTC.CPR.R = 15)
+
 #define EXTINT_ENABLE(int_num)			(SIU.IRER.B.IRE##int_num = 1)
 #define EXTINT_FALLING_EDGE(int_num)	(SIU.IFEER.B.IFEE##int_num = 1)
 #define EXTINT_RISING_EDGE(int_num)		(SIU.IFEER.B.IREE##int_num = 1)
 #define EXTINT_CLEAR_INT_FLAG(int_num)	(SIU.ISR.B.EIF##int_num = 1)
 #define EXTINT_GET_FLAG(int_num)		(SIU.ISR.B.EIF##int_num)
 
+/* Exported functions prototypes and macros */
+/* ---------------------------------------- */
 
+/* Functions prototypes */
+extern void Ints_Init(void);
+extern void Ints_InstallIntHandler(INTCInterruptFn lp_handler, T_UWORD lub_vector, T_UBYTE lub_priority);
+
+/* Functions macros */
+
+
+/* Exported defines */
 
 #endif

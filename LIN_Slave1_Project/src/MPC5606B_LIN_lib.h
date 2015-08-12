@@ -3,37 +3,33 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* C Include:        %MCP5606B_ClkInit.h%
+* C Include:        %MCP5606B_LIN_lib.h%
 * Instance:         1
-* %version:         1.2 %
+* %version:         1 %
 * %created_by:      Michele Balbi %
-* %date_created:    2015 %
+* %date_created:    July 7 2015 %
 *=============================================================================*/
-/* DESCRIPTION : Header file for clock initialization functions.		      */
+/* DESCRIPTION : Header file for LIN initialization functions.		      	  */
 /*============================================================================*/
-/* FUNCTION COMMENT :   Contains prototypes for clock init functions.         */
+/* FUNCTION COMMENT :   Contains prototypes and necessary defines for LIN     */
+/* 						init functions.           							  */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 25/06/2015  |                               | Michele Balbi    */
-/* First Draft 																  */
-/*----------------------------------------------------------------------------*/
-/*  1.1      | 30/06/2015  |                               | Michele Balbi    */
-/* Formatting to pass C code review.                                          */
-/*----------------------------------------------------------------------------*/
-/*  1.2      | 30/07/2015  |                               | Michele Balbi    */
-/* Removed private defines to be in the .c file.                              */
+/*  1.0      | 07/07/2015  |                               | Michele Balbi    */
+/* Creation of file with functions. 										  */
 /*============================================================================*/
 
-#ifndef CLK_INIT_H
-#define CLK_INIT_H
+#ifndef MPC5606B_LIN_LIB_H
+#define MPC5606B_LIN_LIB_H
 
 /* Includes */
 /* -------- */
 #include "MPC5606B.h"
+#include "conti_typedefs.h"
 
 /* Exported types and constants */
 /* ---------------------------- */
@@ -41,6 +37,52 @@
 /* Types definition */
 /* typedef */
 
+typedef enum {
+	LIN_DATA_RX,
+	LIN_DATA_TX
+}E_LIN_DATA_DIR;
+
+typedef enum {
+	LIN0,
+	LIN1,
+	LIN2,
+	LIN3,
+	LIN4,
+	LIN5,
+	LIN6,
+	LIN7
+}E_LIN_MODULE;
+
+typedef enum {
+	CHKSUM_ENHACED,
+	CHKSUM_CLASSIC
+}E_LIN_CHKSUM_TYPE;
+
+typedef enum {
+	BAUDRATE_2400BPS,
+	BAUDRATE_9600BPS,
+	BAUDRATE_19200BPS,
+	BAUDRATE_115200BPS
+}E_LIN_BAUDRATE;
+
+typedef enum {
+	LIN_FILTER0,
+	LIN_FILTER1,
+	LIN_FILTER2,
+	LIN_FILTER3,
+	LIN_FILTER4,
+	LIN_FILTER5,
+	LIN_FILTER6,
+	LIN_FILTER7,
+	LIN_FILTER8,
+	LIN_FILTER9,
+	LIN_FILTER10,
+	LIN_FILTER11,
+	LIN_FILTER12,
+	LIN_FILTER13,
+	LIN_FILTER14,
+	LIN_FILTER15
+}E_LIN_FILTER_NUMBER;
 
 /*==================================================*/ 
 /* Declaration of exported constants                */
@@ -75,12 +117,19 @@
 /* ---------------------------------------- */
 
 /* Functions prototypes */
+extern void LIN_Master_SendData(T_UBYTE lub_id, T_ULONG lul_MSData, T_ULONG lul_LSData, T_UBYTE lub_NumberOfBytes, E_LIN_CHKSUM_TYPE le_ccs);
+extern void LIN_Master_AskForData(T_UBYTE lub_id, T_UBYTE lub_NumberOfBytes, E_LIN_CHKSUM_TYPE le_ccs);
+extern T_UBYTE LIN_GetBufferData_1Byte(E_LIN_MODULE le_lin_module);
+extern void LIN_LoadBufferData(E_LIN_MODULE le_lin_module, T_ULONG lul_MSData, T_ULONG lul_LSData);
+extern void LIN_Slave_InitMode(void);
+extern void LIN_Slave_Config(void);
+extern void LIN_Master_InitMode(E_LIN_MODULE le_lin_module);
+extern void LIN_Master_Config(E_LIN_MODULE le_lin_module);
+extern void LIN_NormalMode(E_LIN_MODULE le_lin_module);
+extern void LIN_Slave_FilterConfig(E_LIN_FILTER_NUMBER le_FilterNumber, T_UBYTE lub_id, T_UBYTE lub_NumberOfBytes, E_LIN_CHKSUM_TYPE le_ccs, E_LIN_DATA_DIR le_dir);
+extern void LIN_Slave_FiltersInit(void);
 
-extern void initModesAndClock(void);
 
-extern void initPeriClkGen(void);
-
-extern void disableWatchdog(void);
 
 /* Functions macros */
 
