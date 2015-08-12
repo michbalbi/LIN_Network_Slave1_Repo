@@ -81,9 +81,9 @@
 /* Exported functions */
 /* ------------------ */
 /**************************************************************
- *  Name                 :	LIN_Master_SendData
- *  Description          :	
- *  Parameters           :  
+ *  Name                 :	LIN2_Error
+ *  Description          :	Handler function for LINFLEX2 errors.
+ *  Parameters           :  -
  *  Return               :	void
  *  Critical/explanation :  yes
  **************************************************************/
@@ -96,7 +96,7 @@ void LIN2_Error(void){
 
 /**************************************************************
  *  Name                 :	LIN_Master_SendData
- *  Description          :	
+ *  Description          :	Handler function for LINFLEX0 TX event.
  *  Parameters           :  
  *  Return               :	void
  *  Critical/explanation :  yes
@@ -134,8 +134,8 @@ void LIN0_TXCompleted(void){
 }
 
 /**************************************************************
- *  Name                 :	LIN_Master_SendData
- *  Description          :	
+ *  Name                 :	LIN0_RXCompleted
+ *  Description          :	Handler function for LINFLEX0 RX event.
  *  Parameters           :  
  *  Return               :	void
  *  Critical/explanation :  yes
@@ -167,9 +167,9 @@ void LIN0_RXCompleted(void){
 }
 
 /**************************************************************
- *  Name                 :	LIN_Master_SendData
- *  Description          :	
- *  Parameters           :  
+ *  Name                 :	LIN2_TXCompleted
+ *  Description          :	Handler function for LINFLEX2 TX event.
+ *  Parameters           :  -
  *  Return               :	void
  *  Critical/explanation :  yes
  **************************************************************/
@@ -181,9 +181,9 @@ void LIN2_TXCompleted(void){
 }
 
 /**************************************************************
- *  Name                 :	LIN_Master_SendData
- *  Description          :	
- *  Parameters           :  
+ *  Name                 :	LIN2_RXCompleted
+ *  Description          :	Handler function for LINFLEX2 RX event.
+ *  Parameters           :  -
  *  Return               :	void
  *  Critical/explanation :  yes
  **************************************************************/

@@ -81,8 +81,14 @@
 /* ------------------ */
 /**************************************************************
  *  Name                 :	LIN_Master_SendData
- *  Description          :	
- *  Parameters           :  
+ *  Description          :	Loads received data into master's buffer and
+ 							triggers header transmission. The master's slave
+ 							task then sends the loaded data.
+ *  Parameters           :  T_UBYTE lub_id,    
+ 							T_ULONG lul_MSData,
+ 							T_ULONG lul_LSData,
+ 							T_UBYTE lub_NumberOfBytes,
+ 							E_LIN_CHKSUM_TYPE le_ccs
  *  Return               :	void
  *  Critical/explanation :  yes
  **************************************************************/
@@ -99,8 +105,11 @@
  
  /**************************************************************
  *  Name                 :	LIN_Master_AskForData
- *  Description          :	
- *  Parameters           :  
+ *  Description          :	Triggers header transmission. The master will
+ 							wait for a slave response.
+ *  Parameters           :  T_UBYTE lub_id,  
+ 							T_UBYTE lub_NumberOfBytes,
+ 							E_LIN_CHKSUM_TYPE le_ccs
  *  Return               :	void
  *  Critical/explanation :  yes
  **************************************************************/
@@ -126,9 +135,10 @@
  
  /**************************************************************
  *  Name                 :	LIN_GetBufferData_1Byte
- *  Description          :	
- *  Parameters           :  
- *  Return               :	void
+ *  Description          :	Reads 1 byte from data buffer from
+ 							corresponding LINFLEX module.
+ *  Parameters           :  E_LIN_MODULE le_lin_module
+ *  Return               :	T_UBYTE
  *  Critical/explanation :  yes
  **************************************************************/
  T_UBYTE LIN_GetBufferData_1Byte(E_LIN_MODULE le_lin_module){
@@ -178,8 +188,10 @@
  
  /**************************************************************
  *  Name                 :	LIN_LoadBufferData
- *  Description          :	
- *  Parameters           :  
+ *  Description          :	Configures selected LINFLEX module
+ 							with the given baudrate.
+ *  Parameters           :  E_LIN_MODULE le_lin_module, 
+ 							E_LIN_BAUDRATE le_lin_baudrate
  *  Return               :	void
  *  Critical/explanation :  yes
  **************************************************************/
@@ -409,8 +421,11 @@
  
  /**************************************************************
  *  Name                 :	LIN_LoadBufferData
- *  Description          :	
- *  Parameters           :  
+ *  Description          :	Loads given data into the selected
+ 							LINFLEX module's data buffer.
+ *  Parameters           :  E_LIN_MODULE le_lin_module,
+ 							T_ULONG lul_MSData, 
+ 							T_ULONG lul_LSData
  *  Return               :	void
  *  Critical/explanation :  yes
  **************************************************************/
@@ -476,7 +491,7 @@
  
  /**************************************************************
  *  Name                 :	LIN_Slave_Config
- *  Description          :	
+ *  Description          :	Configures LINFLEX0 as slave.
  *  Parameters           :  
  *  Return               :	void
  *  Critical/explanation :  yes
